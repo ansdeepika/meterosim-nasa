@@ -966,6 +966,565 @@ def get_threat_level_from_size(size):
     else:
         return 'MINIMAL_THREAT'
 
+# Education Card API endpoints
+@app.route('/api/education/cards', methods=['GET'])
+def get_education_cards():
+    """Get all education cards with enhanced content"""
+    try:
+        cards = [
+            {
+                'id': 'asteroid-basics',
+                'title': 'Asteroid Fundamentals',
+                'emoji': '🪨',
+                'difficulty': 'beginner',
+                'readingTime': 5,
+                'category': 'basics',
+                'description': 'Learn about asteroids, their composition, and origins',
+                'gradient': 'from-blue-500 to-purple-600',
+                'content': [
+                    {
+                        'type': 'overview',
+                        'title': 'What are Asteroids?',
+                        'text': 'Asteroids are rocky remnants from the early solar system, formed about 4.6 billion years ago. Most orbit the Sun between Mars and Jupiter in the asteroid belt.',
+                        'source': 'NASA JPL',
+                        'lastUpdated': '2024-01-15'
+                    },
+                    {
+                        'type': 'composition',
+                        'title': 'Asteroid Types',
+                        'text': 'C-type (carbonaceous): 75% of asteroids, dark and carbon-rich. S-type (silicaceous): 17%, made of silicate and nickel-iron. M-type (metallic): 8%, mostly nickel-iron.',
+                        'source': 'Minor Planet Center',
+                        'lastUpdated': '2024-01-10'
+                    },
+                    {
+                        'type': 'size',
+                        'title': 'Size Distribution',
+                        'text': 'Over 1 million asteroids larger than 1km exist. Only about 25,000 are larger than 1km. The largest, Ceres, is 940km in diameter.',
+                        'source': 'NASA NEO Program',
+                        'lastUpdated': '2024-01-12'
+                    }
+                ]
+            },
+            {
+                'id': 'impact-physics',
+                'title': 'Impact Physics',
+                'emoji': '💥',
+                'difficulty': 'intermediate',
+                'readingTime': 8,
+                'category': 'science',
+                'description': 'Understanding the physics behind asteroid impacts',
+                'gradient': 'from-red-500 to-orange-600',
+                'content': [
+                    {
+                        'type': 'nasa-facts',
+                        'title': 'NASA Asteroid Fast Facts',
+                        'text': 'Asteroids are rocky remnants from the solar system\'s formation 4.6 billion years ago. NASA has cataloged over 1.3 million asteroids ranging from 33 feet to 329 miles in diameter. Most orbit between Mars and Jupiter.',
+                        'source': 'NASA Solar System Exploration',
+                        'lastUpdated': '2024-01-20'
+                    },
+                    {
+                        'type': 'energy',
+                        'title': 'Impact Energy Physics',
+                        'text': 'Impact energy = ½mv². A 100m asteroid at 20km/s releases 100 megatons TNT equivalent. A 10km asteroid at 30,000 mph would release 50 million megatons - enough to cause global environmental changes.',
+                        'source': 'NASA Glenn Research Center',
+                        'lastUpdated': '2024-01-18'
+                    },
+                    {
+                        'type': 'crater',
+                        'title': 'Crater Formation Process',
+                        'text': 'Impact cratering is an explosion process occurring in three phases: contact/compression (microseconds), excavation (seconds), and modification (minutes). Crater diameter is typically 10-20x the asteroid diameter.',
+                        'source': 'Lunar and Planetary Institute',
+                        'lastUpdated': '2024-01-15'
+                    },
+                    {
+                        'type': 'hazardous',
+                        'title': 'Potentially Hazardous Objects',
+                        'text': 'NASA\'s Planetary Defense Coordination Office tracks asteroids that come within 4.6 million miles of Earth\'s orbit and are larger than 460 feet in diameter.',
+                        'source': 'NASA Planetary Defense',
+                        'lastUpdated': '2024-01-17'
+                    }
+                ]
+            },
+            {
+                'id': 'planetary-defense',
+                'title': 'Planetary Defense',
+                'emoji': '🛡️',
+                'difficulty': 'intermediate',
+                'readingTime': 10,
+                'category': 'defense',
+                'description': 'Methods and technologies to protect Earth from asteroid impacts',
+                'gradient': 'from-green-500 to-blue-600',
+                'content': [
+                    {
+                        'type': 'detection',
+                        'title': 'Detection Systems',
+                        'text': 'Ground-based telescopes like Catalina Sky Survey and LINEAR detect 90% of 1km+ asteroids. Space-based missions like NEOWISE provide infrared detection capabilities.',
+                        'source': 'NASA Planetary Defense',
+                        'lastUpdated': '2024-01-16'
+                    },
+                    {
+                        'type': 'deflection',
+                        'title': 'Deflection Methods',
+                        'text': 'Kinetic impactor (DART mission), gravity tractor, nuclear explosive device, solar sail, mass driver. Choice depends on asteroid size, composition, and warning time.',
+                        'source': 'ESA Space Situational Awareness',
+                        'lastUpdated': '2024-01-15'
+                    },
+                    {
+                        'type': 'dart',
+                        'title': 'DART Mission Success',
+                        'text': 'NASA\'s DART mission successfully altered asteroid Dimorphos\' orbit by 32 minutes in 2022, proving kinetic impactor technology works.',
+                        'source': 'NASA DART Mission',
+                        'lastUpdated': '2024-01-17'
+                    }
+                ]
+            },
+            {
+                'id': 'historical-impacts',
+                'title': 'Historical Impacts',
+                'emoji': '🦕',
+                'difficulty': 'beginner',
+                'readingTime': 7,
+                'category': 'history',
+                'description': 'Major asteroid impacts throughout Earth\'s history',
+                'gradient': 'from-purple-500 to-pink-600',
+                'content': [
+                    {
+                        'type': 'chicxulub',
+                        'title': 'Chicxulub Impact (66 MYA)',
+                        'text': '10-15km asteroid created 150km crater in Mexico. Released energy equivalent to 100 million megatons, causing mass extinction including dinosaurs.',
+                        'source': 'Geological Society',
+                        'lastUpdated': '2024-01-14'
+                    },
+                    {
+                        'type': 'tunguska',
+                        'title': 'Tunguska Event (1908)',
+                        'text': '50-60m object exploded 5-10km above Siberia, flattening 2,000 km² of forest. No crater formed due to airburst explosion.',
+                        'source': 'Russian Academy of Sciences',
+                        'lastUpdated': '2024-01-12'
+                    },
+                    {
+                        'type': 'chelyabinsk',
+                        'title': 'Chelyabinsk Meteor (2013)',
+                        'text': '20m asteroid exploded over Russia, injuring 1,500 people from glass fragments. Demonstrated need for better detection of smaller objects.',
+                        'source': 'Meteoritical Society',
+                        'lastUpdated': '2024-01-13'
+                    }
+                ]
+            }
+        ]
+        
+        return jsonify({
+            'success': True,
+            'cards': cards,
+            'total': len(cards)
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/education/cards/<card_id>', methods=['GET'])
+def get_education_card_detail(card_id):
+    """Get detailed information for a specific education card"""
+    try:
+        # Enhanced content for detailed view
+        detailed_content = {
+            'asteroid-basics': {
+                'id': 'asteroid-basics',
+                'title': 'Asteroid Fundamentals',
+                'emoji': '🪨',
+                'difficulty': 'beginner',
+                'readingTime': 5,
+                'category': 'basics',
+                'description': 'Comprehensive guide to understanding asteroids',
+                'gradient': 'from-blue-500 to-purple-600',
+                'detailed_sections': [
+                    {
+                        'title': 'Formation and Origins',
+                        'content': 'Asteroids are remnants from the solar system\'s formation 4.6 billion years ago. They represent the building blocks that never coalesced into planets, preserved in the cold vacuum of space.',
+                        'subsections': [
+                            {
+                                'title': 'Solar Nebula Theory',
+                                'text': 'Asteroids formed from the solar nebula - a rotating disk of gas and dust surrounding the young Sun. Temperature and pressure variations determined their composition.'
+                            },
+                            {
+                                'title': 'Asteroid Belt Formation',
+                                'text': 'Jupiter\'s gravitational influence prevented asteroid belt material from forming a planet, instead creating a region of scattered rocky bodies.'
+                            }
+                        ]
+                    },
+                    {
+                        'title': 'Classification Systems',
+                        'content': 'Asteroids are classified by spectral properties, composition, and orbital characteristics.',
+                        'subsections': [
+                            {
+                                'title': 'Spectral Classes',
+                                'text': 'C-type (carbonaceous): Dark, carbon-rich, primitive composition. S-type (silicaceous): Rocky, metallic, more processed. M-type (metallic): Mostly iron-nickel, possibly core remnants.'
+                            },
+                            {
+                                'title': 'Orbital Groups',
+                                'text': 'Main Belt: Between Mars and Jupiter. Near-Earth Asteroids (NEAs): Orbits crossing Earth\'s path. Trojans: Sharing Jupiter\'s orbit at Lagrange points.'
+                            }
+                        ]
+                    }
+                ],
+                'interactive_elements': [
+                    {
+                        'type': 'size_comparison',
+                        'title': 'Asteroid Size Comparison',
+                        'data': [
+                            {'name': 'Ceres', 'diameter': 940, 'type': 'Dwarf Planet'},
+                            {'name': 'Vesta', 'diameter': 525, 'type': 'Large Asteroid'},
+                            {'name': 'Pallas', 'diameter': 512, 'type': 'Large Asteroid'},
+                            {'name': 'Hygiea', 'diameter': 430, 'type': 'Large Asteroid'},
+                            {'name': 'Apophis', 'diameter': 0.34, 'type': 'Near-Earth Asteroid'}
+                        ]
+                    }
+                ],
+                'recent_discoveries': [
+                    {
+                        'date': '2024-01-15',
+                        'title': 'New Asteroid Family Discovered',
+                        'description': 'Astronomers identified a new family of asteroids with unusual spectral properties, suggesting a unique formation history.'
+                    }
+                ],
+                'related_missions': [
+                    {'name': 'OSIRIS-REx', 'target': 'Bennu', 'status': 'Sample Return Complete'},
+                    {'name': 'Hayabusa2', 'target': 'Ryugu', 'status': 'Mission Complete'},
+                    {'name': 'DART', 'target': 'Dimorphos', 'status': 'Mission Complete'},
+                    {'name': 'Lucy', 'target': 'Trojan Asteroids', 'status': 'En Route'}
+                ]
+            },
+            'impact-physics': {
+                'id': 'impact-physics',
+                'title': 'Impact Physics',
+                'emoji': '💥',
+                'difficulty': 'intermediate',
+                'readingTime': 8,
+                'category': 'science',
+                'description': 'Deep dive into the physics of asteroid impacts',
+                'gradient': 'from-red-500 to-orange-600',
+                'detailed_sections': [
+                    {
+                        'title': 'NASA Asteroid Fast Facts',
+                        'content': 'Asteroids are rocky remnants from the early formation of the solar system, approximately 4.6 billion years ago. They range in size from less than 33 feet (10 meters) to about 329 miles (530 kilometers) in diameter. Most asteroids orbit the Sun between Mars and Jupiter in the main asteroid belt.',
+                        'subsections': [
+                            {
+                                'title': 'Size Distribution',
+                                'text': 'NASA has cataloged over 1.3 million asteroids. Most are small - only about 25,000 are larger than 1 kilometer. The largest asteroid, Ceres, is 940 km in diameter and classified as a dwarf planet.'
+                            },
+                            {
+                                'title': 'Potentially Hazardous Objects',
+                                'text': 'NASA\'s Planetary Defense Coordination Office tracks potentially hazardous asteroids. An asteroid is considered potentially hazardous if its orbit comes within 4.6 million miles (7.5 million kilometers) of Earth\'s orbit and has an estimated diameter of 460 feet (140 meters) or greater.'
+                            },
+                            {
+                                'title': 'Orbital Characteristics',
+                                'text': 'Most asteroids orbit between Mars and Jupiter, but some have eccentric orbits that bring them close to Earth. Near-Earth asteroids (NEAs) are of particular interest for both scientific study and planetary defense.'
+                            }
+                        ]
+                    },
+                    {
+                        'title': 'Impact Energy Physics',
+                        'content': 'The kinetic energy of an impacting object is the key factor determining crater size and damage. Impact energy follows the formula KE = ½mv², where faster or more massive objects create exponentially more destruction.',
+                        'subsections': [
+                            {
+                                'title': 'Energy-to-TNT Conversion',
+                                'text': 'A 100-meter asteroid traveling at 20 km/s releases energy equivalent to 100 megatons of TNT - 2000 times more powerful than the largest nuclear weapon ever detonated. A 10 km asteroid at 30,000 mph would release approximately 50 million megatons of TNT.'
+                            },
+                            {
+                                'title': 'Velocity Impact',
+                                'text': 'Typical asteroid impact velocities range from 11-72 km/s relative to Earth. Earth\'s escape velocity (11.2 km/s) represents the minimum impact speed, while asteroids from the outer solar system can reach much higher velocities.'
+                            },
+                            {
+                                'title': 'Mass-Energy Relationship',
+                                'text': 'The relationship between impactor energy and crater size is not linear. A 10x increase in diameter results in 1000x more mass and energy, while a 2x increase in velocity results in 4x more energy due to the squared velocity term.'
+                            }
+                        ]
+                    },
+                    {
+                        'title': 'Crater Formation Process',
+                        'content': 'Impact cratering is essentially an explosion process where the initial kinetic energy of the projectile does work on the target to excavate material and create a crater. The process occurs in three distinct phases happening over microseconds to minutes.',
+                        'subsections': [
+                            {
+                                'title': 'Contact/Compression Phase (microseconds)',
+                                'text': 'Upon contact, shock waves propagate through both the asteroid and target material. Pressures reach millions of atmospheres, instantly vaporizing and melting material at the impact site. The asteroid is completely destroyed in this phase.'
+                            },
+                            {
+                                'title': 'Excavation Phase (seconds)',
+                                'text': 'The expanding shock wave excavates the crater by ejecting material at high velocities. This creates the characteristic ejecta blanket around the crater. The crater diameter is typically 10-20 times the asteroid diameter.'
+                            },
+                            {
+                                'title': 'Modification Phase (minutes to hours)',
+                                'text': 'Crater walls collapse due to gravity, and for large impacts, a central peak may form as the crater floor rebounds. The final crater shape depends on the impact energy, target material properties, and gravitational conditions.'
+                            }
+                        ]
+                    },
+                    {
+                        'title': 'Impact Effects and Consequences',
+                        'content': 'Asteroid impacts produce both primary and secondary effects that can cause widespread destruction far beyond the immediate impact site.',
+                        'subsections': [
+                            {
+                                'title': 'Primary Effects',
+                                'text': 'Direct consequences include crater formation, intense seismic waves (equivalent to major earthquakes), thermal radiation that can ignite fires hundreds of kilometers away, and atmospheric shock waves.'
+                            },
+                            {
+                                'title': 'Secondary Effects',
+                                'text': 'Ocean impacts generate massive tsunamis that can travel across entire ocean basins. Large impacts inject dust and debris into the atmosphere, potentially causing climate changes. Wildfires can be triggered by thermal radiation and hot ejecta.'
+                            },
+                            {
+                                'title': 'Global Consequences',
+                                'text': 'Very large impacts (>1 km asteroids) can cause global environmental changes, including "impact winter" from atmospheric dust blocking sunlight, acid rain from vaporized sulfur compounds, and ozone depletion.'
+                            }
+                        ]
+                    }
+                ],
+                'calculators': [
+                    {
+                        'type': 'impact_energy',
+                        'title': 'Impact Energy Calculator',
+                        'parameters': ['diameter', 'velocity', 'density'],
+                        'outputs': ['kinetic_energy', 'tnt_equivalent']
+                    },
+                    {
+                        'type': 'crater_size',
+                        'title': 'Crater Size Estimator',
+                        'parameters': ['energy', 'target_type', 'impact_angle'],
+                        'outputs': ['crater_diameter', 'crater_depth']
+                    }
+                ],
+                'recent_discoveries': [
+                    {
+                        'date': '2024-01-20',
+                        'title': 'DART Mission Impact Analysis Complete',
+                        'description': 'NASA completed detailed analysis of DART\'s impact on asteroid Dimorphos, confirming the kinetic impactor technique changed the asteroid\'s orbital period by 32 minutes - exceeding expectations.'
+                    },
+                    {
+                        'date': '2024-01-18',
+                        'title': 'New Impact Crater Dating Method',
+                        'description': 'Scientists developed improved techniques for dating impact craters using shocked minerals, providing better understanding of Earth\'s impact history and frequency.'
+                    },
+                    {
+                        'date': '2024-01-12',
+                        'title': 'Chelyabinsk Meteor New Findings',
+                        'description': 'Analysis of the 2013 Chelyabinsk meteor revealed new insights into how small asteroids fragment in Earth\'s atmosphere, improving models for future impact predictions.'
+                    }
+                ],
+                'related_missions': [
+                    {
+                        'name': 'DART (Double Asteroid Redirection Test)',
+                        'target': 'Dimorphos asteroid',
+                        'status': 'Completed Successfully'
+                    },
+                    {
+                        'name': 'NEO Surveyor',
+                        'target': 'Near-Earth Object detection',
+                        'status': 'In Development'
+                    },
+                    {
+                        'name': 'Hera Mission',
+                        'target': 'Post-DART Didymos system study',
+                        'status': 'Planned Launch 2024'
+                    }
+                ]
+            },
+            'planetary-defense': {
+                'id': 'planetary-defense',
+                'title': 'Planetary Defense',
+                'emoji': '🛡️',
+                'difficulty': 'intermediate',
+                'readingTime': 10,
+                'category': 'defense',
+                'description': 'Comprehensive overview of planetary defense strategies',
+                'gradient': 'from-green-500 to-blue-600',
+                'detailed_sections': [
+                    {
+                        'title': 'Detection Networks',
+                        'content': 'Global network of ground and space-based telescopes continuously scan for potentially hazardous asteroids.',
+                        'subsections': [
+                            {
+                                'title': 'Ground-Based Surveys',
+                                'text': 'Catalina Sky Survey, LINEAR, NEOWISE, and other programs have discovered over 90% of kilometer-sized near-Earth asteroids.'
+                            },
+                            {
+                                'title': 'Space-Based Detection',
+                                'text': 'NEOWISE infrared telescope and planned NEO Surveyor mission provide complementary detection capabilities, especially for dark asteroids.'
+                            }
+                        ]
+                    },
+                    {
+                        'title': 'Deflection Technologies',
+                        'content': 'Multiple methods exist to change an asteroid\'s trajectory, each suited for different scenarios.',
+                        'subsections': [
+                            {
+                                'title': 'Kinetic Impactor',
+                                'text': 'Spacecraft impacts asteroid to change velocity. DART mission proved this concept works. Effective for small to medium asteroids with sufficient warning time.'
+                            },
+                            {
+                                'title': 'Gravity Tractor',
+                                'text': 'Spacecraft hovers near asteroid, using gravitational attraction to slowly alter trajectory. Precise but requires long lead time.'
+                            },
+                            {
+                                'title': 'Nuclear Option',
+                                'text': 'Nuclear explosive device could deflect or fragment large asteroids. Last resort option due to technical and political challenges.'
+                            }
+                        ]
+                    }
+                ],
+                'mission_timeline': [
+                    {
+                        'year': '1998',
+                        'event': 'Spaceguard Survey begins',
+                        'description': 'Congressional mandate to find 90% of 1km+ near-Earth asteroids'
+                    },
+                    {
+                        'year': '2016',
+                        'event': 'OSIRIS-REx launches',
+                        'description': 'Sample return mission to asteroid Bennu'
+                    },
+                    {
+                        'year': '2021',
+                        'event': 'DART launches',
+                        'description': 'First planetary defense test mission'
+                    },
+                    {
+                        'year': '2022',
+                        'event': 'DART impact success',
+                        'description': 'Successfully altered Dimorphos orbit'
+                    },
+                    {
+                        'year': '2028',
+                        'event': 'NEO Surveyor launch',
+                        'description': 'Next-generation space-based asteroid hunter'
+                    }
+                ]
+            },
+            'historical-impacts': {
+                'id': 'historical-impacts',
+                'title': 'Historical Impacts',
+                'emoji': '🦕',
+                'difficulty': 'beginner',
+                'readingTime': 7,
+                'category': 'history',
+                'description': 'Major impact events that shaped Earth\'s history',
+                'gradient': 'from-purple-500 to-pink-600',
+                'detailed_sections': [
+                    {
+                        'title': 'Mass Extinction Events',
+                        'content': 'Several mass extinctions in Earth\'s history are linked to asteroid impacts.',
+                        'subsections': [
+                            {
+                                'title': 'End-Cretaceous (66 MYA)',
+                                'text': 'Chicxulub impact killed 75% of species including non-avian dinosaurs. 10-15km asteroid created global environmental catastrophe.'
+                            },
+                            {
+                                'title': 'End-Permian (252 MYA)',
+                                'text': 'Largest mass extinction (96% of species) may have involved impact, though volcanism was primary cause.'
+                            }
+                        ]
+                    },
+                    {
+                        'title': 'Recent Impact Events',
+                        'content': 'Modern impacts provide insights into impact processes and hazards.',
+                        'subsections': [
+                            {
+                                'title': 'Tunguska (1908)',
+                                'text': 'Airburst explosion flattened 2,000 km² of Siberian forest. Demonstrated destructive power of relatively small objects.'
+                            },
+                            {
+                                'title': 'Chelyabinsk (2013)',
+                                'text': 'Unexpected 20m asteroid injured 1,500 people. Highlighted gaps in detection of smaller objects.'
+                            }
+                        ]
+                    }
+                ],
+                'impact_timeline': [
+                    {
+                        'age': '4.1-3.8 billion years ago',
+                        'event': 'Late Heavy Bombardment',
+                        'description': 'Period of intense asteroid and comet impacts on inner solar system'
+                    },
+                    {
+                        'age': '252 million years ago',
+                        'event': 'End-Permian Extinction',
+                        'description': 'Largest mass extinction, possibly involving impact'
+                    },
+                    {
+                        'age': '66 million years ago',
+                        'event': 'Chicxulub Impact',
+                        'description': 'End-Cretaceous extinction, killed dinosaurs'
+                    },
+                    {
+                        'age': '1908',
+                        'event': 'Tunguska Event',
+                        'description': 'Largest impact event in recorded history'
+                    },
+                    {
+                        'age': '2013',
+                        'event': 'Chelyabinsk Meteor',
+                        'description': 'Most recent significant impact event'
+                    }
+                ]
+            }
+        }
+        
+        card_detail = detailed_content.get(card_id)
+        if not card_detail:
+            return jsonify({
+                'success': False,
+                'error': 'Card not found'
+            }), 404
+            
+        return jsonify({
+            'success': True,
+            'card': card_detail
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/education/search', methods=['GET'])
+def search_education_content():
+    """Search education content"""
+    try:
+        query = request.args.get('q', '').lower()
+        category = request.args.get('category', '')
+        difficulty = request.args.get('difficulty', '')
+        
+        # This would typically search a database
+        # For now, return filtered results based on query
+        all_cards = [
+            {'id': 'asteroid-basics', 'title': 'Asteroid Fundamentals', 'category': 'basics', 'difficulty': 'beginner'},
+            {'id': 'impact-physics', 'title': 'Impact Physics', 'category': 'science', 'difficulty': 'intermediate'},
+            {'id': 'planetary-defense', 'title': 'Planetary Defense', 'category': 'defense', 'difficulty': 'intermediate'},
+            {'id': 'historical-impacts', 'title': 'Historical Impacts', 'category': 'history', 'difficulty': 'beginner'}
+        ]
+        
+        filtered_cards = []
+        for card in all_cards:
+            matches_query = not query or query in card['title'].lower()
+            matches_category = not category or card['category'] == category
+            matches_difficulty = not difficulty or card['difficulty'] == difficulty
+            
+            if matches_query and matches_category and matches_difficulty:
+                filtered_cards.append(card)
+        
+        return jsonify({
+            'success': True,
+            'results': filtered_cards,
+            'total': len(filtered_cards)
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
 if __name__ == '__main__':
     print("🚀 Enhanced NASA Impact Simulator Backend Starting...")
     print(f"🔑 NASA API Key: {'✅ Configured' if NASA_API_KEY else '❌ Missing'}")

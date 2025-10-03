@@ -10,6 +10,8 @@ import AftermathVisualization from "./components/AftermathVisualization";
 import CityRiskAnalyzer from "./components/CityRiskAnalyzer";
 import SurvivalProbabilityZones from "./components/SurvivalProbabilityZones";
 import GlobalAlertSystem from "./components/GlobalAlertSystem";
+import EducationCards from "./components/EducationCards";
+import DebugNASAData from "./components/DebugNASAData";
 import { NEOData } from "./services/NASAService";
 
 /**
@@ -189,27 +191,7 @@ const Controls: React.FC<ControlsProps> = ({
   );
 };
 
-/**
- * ======== EducationCards ========
- */
-const EducationCards: React.FC = () => {
-  return (
-    <div className="space-y-4">
-      <div className="glass-card p-4 hover:scale-[1.02] transition-transform duration-300">
-        <h4 className="font-semibold text-blue-300 mb-2">🔬 Science</h4>
-        <p className="text-sm text-gray-300">Learn how impact energy is calculated using mass, velocity, and physics principles.</p>
-      </div>
-      <div className="glass-card p-4 hover:scale-[1.02] transition-transform duration-300">
-        <h4 className="font-semibold text-green-300 mb-2">🛡️ Safety</h4>
-        <p className="text-sm text-gray-300">Emergency protocols and safety measures for asteroid impact scenarios.</p>
-      </div>
-      <div className="glass-card p-4 hover:scale-[1.02] transition-transform duration-300">
-        <h4 className="font-semibold text-purple-300 mb-2">⭐ Fun Facts</h4>
-        <p className="text-sm text-gray-300">Discover fascinating cosmic trivia and unlock achievement badges.</p>
-      </div>
-    </div>
-  );
-};
+
 
 /**
  * ======== ResultStatCard ========
@@ -390,6 +372,8 @@ const App: React.FC = () => {
               />
 
               <EducationCards />
+              
+              <DebugNASAData />
             </div>
 
             {/* Middle Column - Enhanced Globe Visualization */}
